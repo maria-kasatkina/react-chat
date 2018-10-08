@@ -6,15 +6,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
 const styles = theme => ({
-
   appBar: {
-    width: `calc(100% - ${320}px)`,
-  },
-
+    width: 'calc(100% - 320px)',
+  }
 });
 
 const ChatHeader = ({classes}) => (
-
   <AppBar
     position="absolute"
     className={classNames(classes.appBar)}
