@@ -20,7 +20,6 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: 320,
-    height: '100%',
     overflowY: 'initial'
   },
   toolbar: theme.mixins.toolbar,
@@ -35,6 +34,7 @@ const Sidebar = ({classes, chatList}) => (
   >
     <div className={classes.toolbar} >
       <TextField
+        fullWidth
         id="standard-search"
         label="Search field"
         type="search"

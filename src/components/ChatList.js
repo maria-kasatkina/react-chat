@@ -12,8 +12,8 @@ const styles = theme => ({
 
 const ChatList = ({classes, chatList}) => (
   <List className={classes.chatList} component="nav">
-    {chatList.map((chatItem, index) => (
-      <ChatListItem key={index} chatItem={chatItem}/>
+    {chatList && chatList.map((chatItem, index) => (
+      <ChatListItem key={index} {...chatItem}/>
     ))}
   </List>
 );

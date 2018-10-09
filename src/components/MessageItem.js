@@ -1,9 +1,9 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from "classnames";
+import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import deepPurple from "@material-ui/core/colors/deepPurple";
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import ChatAvatar from './ChatAvatar';
 
 const styles = theme => ({
@@ -35,9 +35,9 @@ const styles = theme => ({
 class MessageItem extends React.Component {
 
   render() {
-    const {classes, messageItem} = this.props;
-    const isMyMessage = (messageItem.sender === 'me');
-    const userAvatar = ( <ChatAvatar name={messageItem.sender}/>);
+    const {classes, sender, content, date} = this.props;
+    const isMyMessage = (sender === 'me');
+    const userAvatar = ( <ChatAvatar colorFrom={sender}>{sender}</ChatAvatar>);
     return (
       <div className={classNames(
         classes.messageWrapper,
@@ -51,13 +51,13 @@ class MessageItem extends React.Component {
         )}
         >
           <Typography variant="caption" className={classes.purple}>
-            {messageItem.sender}
+            {sender}
           </Typography>
           <Typography variant="body1">
-            {messageItem.content}
+            {content}
           </Typography>
           <Typography variant="caption">
-            {messageItem.date}
+            {date}
           </Typography>
         </Paper>
         {isMyMessage && userAvatar}

@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import MessageList from "./MessageList";
-import NewMessageBlock from "./NewMessageBlock";
+import MessageList from './MessageList';
+import NewMessageBlock from './NewMessageBlock';
 
 const styles = theme => ({
   content: {

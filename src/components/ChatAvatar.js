@@ -1,18 +1,13 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import titleInitials from "../utils/title-initials";
+import titleInitials from '../utils/title-initials';
 import Avatar from '@material-ui/core/Avatar';
-import deepPurple from "@material-ui/core/colors/deepPurple";
+import getColor from '../utils/color-from';
 
-const styles = theme => ({
-  avatar: {
-    color: '#fff',
-    backgroundColor: deepPurple[500],
-  },
-});
 
-const ChatAvatar = ({classes, name}) => (
-  <Avatar className={classes.avatar}>{titleInitials(name)}</Avatar>
+const ChatAvatar = ({colorFrom, children, ...rest}) => (
+  <Avatar style={{ backgroundColor: getColor(colorFrom)}} {...rest} >
+    {titleInitials(children)}
+  </Avatar>
 );
 
-export default withStyles(styles)(ChatAvatar);
+export default ChatAvatar;
