@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import deepPurple from '@material-ui/core/colors/deepPurple';
 import ChatAvatar from './ChatAvatar';
+import getColor from '../utils/color-from';
 
 const styles = theme => ({
   messageWrapper: {
@@ -26,10 +26,7 @@ const styles = theme => ({
   myMessage: {
     margin: '0 13px 0 0',
     backgroundColor: '#e6dcff'
-  },
-  purple: {
-    color: deepPurple[500]
-  },
+  }
 });
 
 class MessageItem extends React.Component {
@@ -50,7 +47,7 @@ class MessageItem extends React.Component {
           isMyMessage && classes.myMessage
         )}
         >
-          <Typography variant="caption" className={classes.purple}>
+          <Typography variant="caption" style={{ color: getColor(sender) }}>
             {sender}
           </Typography>
           <Typography variant="body1">

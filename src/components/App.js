@@ -3,11 +3,10 @@ import {BrowserRouter as Router, Route, Switch, Redirect} from 'react-router-dom
 import WelcomePage from './WelcomePage';
 import ChatPage from './ChatPage';
 
-const App = ({classes}) => (
+const App = () => (
   <Router>
     <Switch>
       <Route exact path="/(welcome)?" component={WelcomePage}/>
-      <Route path="/welcome" component={WelcomePage}/>
       <Route path="/chat" component={ChatPage}/>
       <Redirect to="/" />
     </Switch>
