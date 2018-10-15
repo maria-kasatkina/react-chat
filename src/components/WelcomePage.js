@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import {Redirect} from 'react-router-dom';
 
 const styles  = theme => ({
   tabsPaper: {
@@ -33,8 +34,14 @@ class WelcomePage extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, signup, login, isAuthenticated } = this.props;
     const { activeTab } = this.state;
+
+    if (isAuthenticated){
+      return (
+        <Redirect to="/chat"/>
+      );
+    }
 
     return(
       <React.Fragment>
@@ -58,8 +65,8 @@ class WelcomePage extends React.Component {
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-              {activeTab === 0 && <LoginForm />}
-              {activeTab === 1 && <RegistartionForm />}
+              {activeTab === 0 && <LoginForm onSubmit={login} />}
+              {activeTab === 1 && <RegistartionForm onSubmit={signup} />}
               </div>
             </Paper>
           </Grid>

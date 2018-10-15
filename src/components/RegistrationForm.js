@@ -2,7 +2,6 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import fetch from 'isomorphic-fetch';
 
 const styles  = theme => ({
 
@@ -52,21 +51,10 @@ class RegistrationForm extends React.Component {
       return;
     }
     const {username, password, repeatPassword} = this.state;
-    console.log('Login', username.value, password.value, repeatPassword.value);
+    console.log('Register', username.value, password.value, repeatPassword.value);
 
-    fetch('http://localhost:8000/v1/signup', {
-      method: 'POST',
-      headers: {
-        'Content-type':'application/json'
-      },
-      body: JSON.stringify({
-        username: username.value,
-        password: password.value
-      })
-    })
-      .then(response => response.json())
-      .then(json => console.log(json))
-      .catch(reason => console.log(reason))
+    this.props.onSubmit(username.value, password.value);
+
   };
 
   render() {
