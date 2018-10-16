@@ -5,6 +5,16 @@ import * as serviceWorker from './serviceWorker';
 import './index.css';
 import 'typeface-roboto'
 
+const rootElement = document.getElementById('root');
+// regular imports
+ReactDOM.render(<App /> , rootElement);
+
+if (module.hot) {
+  module.hot.accept('./components/App', () => {
+    ReactDOM.render(<App />, rootElement)
+  })
+}
+
 ReactDOM.render(
   <App />,
   document.getElementById('root')
