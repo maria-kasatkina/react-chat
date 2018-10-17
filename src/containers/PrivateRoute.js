@@ -32,7 +32,7 @@ class PrivateRoute extends React.Component{
 }
 
 const mapStateToProps = state => ({
-
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => bindActionCreators({

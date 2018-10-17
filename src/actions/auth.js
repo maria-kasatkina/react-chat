@@ -104,7 +104,7 @@ export function receiveAuth(){
     }
 
     return fetch('http://localhost:8000/v1/users/me', {
-      method: 'POST',
+      method: 'GET',
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-type':'application/json',
