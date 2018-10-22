@@ -25,31 +25,46 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
-const Sidebar = ({classes, chatList}) => (
-  <Drawer
-    variant="permanent"
-    classes={{
-      paper: classes.drawerPaper,
-    }}
-  >
-    <div className={classes.toolbar} >
-      <TextField
-        fullWidth
-        id="standard-search"
-        label="Search field"
-        type="search"
-        className={classes.textField}
-      />
-    </div>
-    <Divider />
-    <ChatList chatList={chatList}/>
-    <AddChatButton />
-    <BottomNavigation showLabels>
-      <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-    </BottomNavigation>
-  </Drawer>
-);
+class Sidebar extends React.Component {
+
+  state = {
+    value: 0,
+  };
+
+  handleChange = (event, value) => {
+    this.setState({ value });
+  };
+
+  render() {
+    const {classes, chats, addNewChat} = this.props;
+    const {value} = this.state;
+    return (
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.toolbar}>
+          <TextField
+            fullWidth
+            id="standard-search"
+            label="Search field"
+            type="search"
+            className={classes.textField}
+          />
+        </div>
+        <Divider/>
+        <ChatList chatList={(this.state.value === 0)? chats.my : chats.all}/>
+        <AddChatButton addNewChat={addNewChat}/>
+        <BottomNavigation showLabels  value={value} onChange={this.handleChange}>
+          <BottomNavigationAction label="My chats" icon={<RestoreIcon/>}/>
+          <BottomNavigationAction label="Explore" icon={<ExploreIcon/>}/>
+        </BottomNavigation>
+      </Drawer>
+    )
+  }
+}
 
 export default withStyles(styles)(Sidebar);
 

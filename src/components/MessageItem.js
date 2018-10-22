@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import ChatAvatar from './ChatAvatar';
 import getColor from '../utils/color-from';
+import moment from 'moment';
 
 const styles = theme => ({
   messageWrapper: {
@@ -26,15 +27,41 @@ const styles = theme => ({
   myMessage: {
     margin: '0 13px 0 0',
     backgroundColor: '#e6dcff'
+  },
+  statusMessage: {
+    width: '100%',
+    textAlign: 'center'
   }
 });
 
 class MessageItem extends React.Component {
 
   render() {
-    const {classes, sender, content, date} = this.props;
-    const isMyMessage = (sender === 'me');
-    const userAvatar = ( <ChatAvatar colorFrom={sender}>{sender}</ChatAvatar>);
+
+    const {classes, sender, content, createdAt, statusMessage, currentUser} = this.props;
+
+    const isMyMessage = (currentUser._id === sender._id);
+    const userAvatar = ( <ChatAvatar colorFrom={sender.username}>{sender.username}</ChatAvatar>);
+
+    if (statusMessage) {
+      return (
+        <div className={classes.messageWrapper}>
+          <Typography className={classes.statusMessage}>
+            <Typography
+              variant="caption"
+              style={{ color: getColor(sender.username) }}
+            >
+              {sender.username}
+            </Typography>
+            {content}
+            <Typography variant="caption">
+              {moment(createdAt).fromNow()}
+            </Typography>
+          </Typography>
+        </div>
+      );
+    }
+
     return (
       <div className={classNames(
         classes.messageWrapper,
@@ -47,14 +74,14 @@ class MessageItem extends React.Component {
           isMyMessage && classes.myMessage
         )}
         >
-          <Typography variant="caption" style={{ color: getColor(sender) }}>
-            {sender}
+          <Typography variant="caption" style={{ color: getColor(sender.username) }}>
+            {sender.username}
           </Typography>
           <Typography variant="body1">
             {content}
           </Typography>
           <Typography variant="caption">
-            {date}
+            {moment(createdAt).fromNow()}
           </Typography>
         </Paper>
         {isMyMessage && userAvatar}

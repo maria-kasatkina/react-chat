@@ -34,6 +34,11 @@ export default function auth(state = initialState, action){
         user: null,
         token: ''
       };
+    case types.EDIT_USER_PROFILE_SUCCESS:
+      return {
+        ...state,
+        user: action.payload.user
+      };
     default:
       return state;
   }

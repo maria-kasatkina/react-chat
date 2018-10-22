@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   newMessageBlock: {
@@ -17,12 +18,56 @@ const styles = theme => ({
   }
 });
 
-const NewMessageBlock = ({classes}) => (
-  <div className={classes.newMessageBlock}>
-    <Paper className={classes.messageWrapper}>
-      <Input fullWidth placeholder="Type your message..." />
-    </Paper>
-  </div>
-);
+class NewMessageBlock extends React.Component {
+
+  state = {
+    content: '',
+  };
+
+  handleSendMessage = (event) => {
+    const { content } = this.state;
+    if (event.key === 'Enter' && content) {
+      this.props.sendMessage(content);
+      this.setState({ content: ''});
+    }
+  };
+
+  handleInputChange = (event) => {
+    event.persist();
+    this.setState({
+      content: event.target.value,
+    });
+  };
+
+  handleJoinChat = (event) => {
+    event.persist();
+    this.props.joinChat(this.props.activeChat._id);
+  };
+
+  render() {
+
+    const {classes, isChatMember} = this.props;
+    return (
+      <div className={classes.newMessageBlock}>
+        <Paper className={classes.messageWrapper}>
+          {isChatMember ?
+            <Input
+              fullWidth
+              name="content"
+              value={this.state.content}
+              placeholder="Type your message..."
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleSendMessage}
+            />
+            :
+            <Button fullWidth color="primary" variant="contained" onClick={this.handleJoinChat}>
+              Join chat
+            </Button>
+          }
+        </Paper>
+      </div>
+    );
+  }
+}
 
 export default withStyles(styles)(NewMessageBlock);

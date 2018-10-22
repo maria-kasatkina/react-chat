@@ -58,10 +58,26 @@ export function login(username, password){
 }
 
 export function logout(){
-  return (dispatch) => {
+  return (dispatch, getState) => {
     dispatch({
       type: types.LOGOUT_REQUEST
-    })
+    });
+
+    const {token} = getState().auth;
+
+    return callApi('/logout', token)
+      .then(json => {
+        localStorage.removeItem('token');
+
+        dispatch({
+          type: types.LOGOUT_SUCCESS,
+          payload: json,
+        });
+      })
+      .catch(reason => dispatch({
+        type: types.LOGIN_FAILURE,
+        payload: reason
+      }));
   }
 }
 
