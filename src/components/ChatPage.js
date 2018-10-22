@@ -20,14 +20,30 @@ const styles = theme => ({
   }
 });
 
-const ChatPage = ({classes}) => (
-  <div className={classes.root}>
-    <div className={classes.appFrame}>
-      <ChatHeader/>
-      <Sidebar chatList={chatList} />
-      <Chat messageList={messageList}/>
-    </div>
-  </div>
-);
+class ChatPage extends React.Component {
+
+  componentDidMount(){
+    const { fetchAllChats, fetchMyChats } = this.props;
+
+    Promise.all([
+      fetchAllChats(),
+      fetchMyChats()
+    ]);
+  }
+
+  render() {
+    const {classes, chats} = this.props;
+    return (
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
+          <ChatHeader/>
+          <Sidebar chatList={chats}/>
+          <Chat messageList={messageList}/>
+        </div>
+      </div>
+    )
+  }
+}
+
 
 export default withStyles(styles)(ChatPage);

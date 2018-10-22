@@ -43,16 +43,14 @@ class RegistrationForm extends React.Component {
       repeatPassword: { ...repeatPassword, isValid },
     });
     return isValid;
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
     if (!this.validate()) {
       return;
     }
-    const {username, password, repeatPassword} = this.state;
-    console.log('Register', username.value, password.value, repeatPassword.value);
-
+    const {username, password} = this.state;
     this.props.onSubmit(username.value, password.value);
 
   };
@@ -109,6 +107,5 @@ class RegistrationForm extends React.Component {
     )
   }
 }
-
 
 export default withStyles(styles)(RegistrationForm);
