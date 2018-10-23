@@ -126,7 +126,8 @@ export function joinChat(chatId){
           type: types.JOIN_CHAT_SUCCESS,
           payload: {chat},
         });
-        return chat;
+
+        return dispatch(fetchChat(chatId));
       })
       .catch(reason =>
         dispatch({
@@ -146,14 +147,14 @@ export function leaveChat(chatId){
     });
 
     return callApi(`/chats/${chatId}/leave`, token)
-      .then(({chat}) => {
+      .then((json) => {
         dispatch({
           type: types.LEAVE_CHAT_SUCCESS,
-          payload: {chat},
+          payload: json,
         });
 
         dispatch(redirect(`chat`));
-        return chat;
+        return json;
       })
       .catch(reason =>
         dispatch({

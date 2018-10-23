@@ -1,12 +1,7 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
-const styles  = theme => ({
-
-});
 
 class UserProfileForm extends React.Component {
 
@@ -77,4 +72,4 @@ class UserProfileForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(UserProfileForm);
+export default UserProfileForm;
