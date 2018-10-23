@@ -1,6 +1,6 @@
 import React from 'react';
 import MessageItem from './MessageItem';
-import {withStyles} from "@material-ui/core/styles/index";
+import {withStyles} from '@material-ui/core/styles/index';
 
 const styles = theme => ({
   messagesWrapper: {
@@ -32,8 +32,8 @@ class MessageList  extends React.Component {
     const {classes, messageList} = this.props;
     return (
       <div className={classes.messagesWrapper} ref="messagesWrapper">
-        {messageList.map((messageItem, index) => (
-          <MessageItem key={index} messageItem={messageItem}/>
+        {messageList && messageList.map((messageItem, index) => (
+          <MessageItem key={index} {...messageItem}/>
         ))}
       </div>
     )

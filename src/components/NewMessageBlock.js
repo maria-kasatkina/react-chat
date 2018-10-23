@@ -14,22 +14,13 @@ const styles = theme => ({
   messageWrapper: {
     width: '100%',
     padding: '20px'
-  },
-  newMessageInput: {
-    width: '100%'
   }
 });
 
 const NewMessageBlock = ({classes}) => (
   <div className={classes.newMessageBlock}>
     <Paper className={classes.messageWrapper}>
-      <Input
-        placeholder="Type your message..."
-        className={classes.newMessageInput}
-        inputProps={{
-          'aria-label': 'Description',
-        }}
-      />
+      <Input fullWidth placeholder="Type your message..." />
     </Paper>
   </div>
 );

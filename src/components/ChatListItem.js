@@ -3,10 +3,10 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ChatAvatar from './ChatAvatar';
 
-const ChatListItem = ({classes, chatItem}) => (
+const ChatListItem = ({classes, title, date}) => (
   <ListItem button>
-    <ChatAvatar name={chatItem.title}/>
-    <ListItemText primary={chatItem.title} secondary={chatItem.date} />
+    <ChatAvatar colorFrom={title}>{title}</ChatAvatar>
+    <ListItemText primary={title} secondary={date} />
   </ListItem>
 );
 
