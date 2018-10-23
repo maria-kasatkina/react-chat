@@ -28,16 +28,37 @@ const styles = theme => ({
 class Sidebar extends React.Component {
 
   state = {
-    value: 0,
+    chatTabValue: 0,
+    searchValue: ''
   };
 
-  handleChange = (event, value) => {
-    this.setState({ value });
+  handleChangeChatTab = (event, value) => {
+    this.setState({ chatTabValue: value });
+  };
+
+  handleInputChange = (event) => {
+    event.persist();
+    this.setState({
+      searchValue: event.target.value,
+    });
+  };
+
+  searching = (chats, searchValue) => {
+    return chats
+      .filter(chat => chat.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+      )
+      .sort((one, two) =>
+        one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1
+      );
   };
 
   render() {
+
     const {classes, chats, addNewChat} = this.props;
-    const {value} = this.state;
+    const {chatTabValue, searchValue} = this.state;
+
     return (
       <Drawer
         variant="permanent"
@@ -51,13 +72,15 @@ class Sidebar extends React.Component {
             id="chat-search"
             label="Search field"
             type="search"
+            value={searchValue}
             className={classes.textField}
+            onChange={this.handleInputChange}
           />
         </div>
         <Divider/>
-        <ChatList chatList={(this.state.value === 0)? chats.my : chats.all}/>
+        <ChatList chatList={(chatTabValue === 0)? this.searching(chats.my, searchValue) : this.searching(chats.all, searchValue)}/>
         <AddChatButton addNewChat={addNewChat}/>
-        <BottomNavigation showLabels  value={value} onChange={this.handleChange}>
+        <BottomNavigation showLabels  value={chatTabValue} onChange={this.handleChangeChatTab}>
           <BottomNavigationAction label="My chats" icon={<RestoreIcon/>}/>
           <BottomNavigationAction label="Explore" icon={<ExploreIcon/>}/>
         </BottomNavigation>
