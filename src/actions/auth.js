@@ -73,6 +73,7 @@ export function logout(){
           type: types.LOGOUT_SUCCESS,
           payload: json,
         });
+
       })
       .catch(reason => dispatch({
         type: types.LOGIN_FAILURE,

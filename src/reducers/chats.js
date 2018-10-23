@@ -1,5 +1,5 @@
 import {combineReducers} from 'redux';
-import * as types from '../constants/chats';
+import * as types from '../constants';
 
 const initialState = {
   activeId: '',
@@ -16,6 +16,7 @@ const activeId = (state = initialState.activeId, action) => {
     case types.UNSET_ACTIVE_CHAT:
     case types.LEAVE_CHAT_SUCCESS:
     case types.DELETE_CHAT_SUCCESS:
+    case types.LOGOUT_SUCCESS:
       return '';
     default:
       return state;

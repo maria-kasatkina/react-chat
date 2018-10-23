@@ -1,6 +1,5 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import classNames from 'classnames';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -21,7 +20,7 @@ const ChatHeader = ({classes, logout, currentUser, editUserProfile, activeChat, 
 
   <AppBar
     position="absolute"
-    className={classNames(classes.appBar)}
+    className={classes.appBar}
   >
     <Toolbar>
       {activeChat ?

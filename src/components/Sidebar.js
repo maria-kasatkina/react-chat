@@ -48,7 +48,7 @@ class Sidebar extends React.Component {
         <div className={classes.toolbar}>
           <TextField
             fullWidth
-            id="standard-search"
+            id="chat-search"
             label="Search field"
             type="search"
             className={classes.textField}
