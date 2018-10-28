@@ -28,12 +28,21 @@ const styles = theme => ({
   },
 });
 
-const Chat = ({classes, messageList, sendMessage, joinChat, activeChat, currentUser}) => (
+const Chat = ({classes, messageList, sendMessage, joinChat, activeChat, currentUser, isConnected}) => (
   <main className={classes.content}>
     {activeChat ?
       <React.Fragment>
-        <MessageList messageList={messageList} activeChat={activeChat} currentUser={currentUser}/>
-        <NewMessageBlock sendMessage = {sendMessage} isChatMember={currentUser.isChatMember} joinChat={joinChat} activeChat={activeChat}/>
+        <MessageList
+          messageList={messageList}
+          activeChat={activeChat}
+          currentUser={currentUser}
+        />
+        <NewMessageBlock
+          disabled={!isConnected}
+          sendMessage = {sendMessage}
+          isChatMember={currentUser.isChatMember}
+          onJoinButtonClick={() => joinChat(activeChat._id)}
+        />
       </React.Fragment>
     :
       <div className={classes.infoBlock}>

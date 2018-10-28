@@ -51,12 +51,13 @@ class UserMenu extends React.Component {
 
   render(){
 
-    const { classes, currentUser, editUserProfile } = this.props;
+    const { classes, currentUser, editUserProfile, disabled } = this.props;
     const { anchorEl } = this.state;
 
     return (
       <React.Fragment>
         <Button
+          disabled={disabled}
           color="inherit"
           aria-label="Add"
           onClick={this.handleMenuClick}

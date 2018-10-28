@@ -19,23 +19,26 @@ class ChatMenu extends React.Component {
   };
 
   handleLeaveChat = () => {
-    this.props.leaveChat(this.props.activeChatId);
+    this.props.onLeaveChat();
     this.handleMenuClose();
   };
 
   handleDeleteChat = () => {
-    this.props.deleteChat(this.props.activeChatId);
+    this.props.onDeleteChat();
     this.handleMenuClose();
   };
 
   render(){
 
     const { anchorEl } = this.state;
-    const { currentUser } = this.props;
+    const { currentUser, disabled } = this.props;
 
     return (
       <React.Fragment>
-        <IconButton onClick={this.handleMenuClick}>
+        <IconButton
+          onClick={this.handleMenuClick}
+          disabled={disabled}
+        >
           <MoreVertIcon />
         </IconButton>
         <Menu

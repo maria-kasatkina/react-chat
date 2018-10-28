@@ -38,10 +38,11 @@ class AddChatButton extends React.Component {
   };
 
   render() {
-    const {classes, addNewChat} = this.props;
+    const {classes, addNewChat, disabled} = this.props;
     return (
       <React.Fragment>
         <Button variant="fab"
+          disabled={disabled}
           color="primary"
           aria-label="Add"
           className={classes.addChatButton}

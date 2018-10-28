@@ -56,7 +56,7 @@ class Sidebar extends React.Component {
 
   render() {
 
-    const {classes, chats, addNewChat} = this.props;
+    const {classes, chats, addNewChat, isConnected} = this.props;
     const {chatTabValue, searchValue} = this.state;
 
     return (
@@ -78,8 +78,14 @@ class Sidebar extends React.Component {
           />
         </div>
         <Divider/>
-        <ChatList chatList={(chatTabValue === 0)? this.searching(chats.my, searchValue) : this.searching(chats.all, searchValue)}/>
-        <AddChatButton addNewChat={addNewChat}/>
+        <ChatList
+          chatList={(chatTabValue === 0)? this.searching(chats.my, searchValue) : this.searching(chats.all, searchValue)}
+          disabled={!isConnected}
+        />
+        <AddChatButton
+          addNewChat={addNewChat}
+          disabled={!isConnected}
+        />
         <BottomNavigation showLabels  value={chatTabValue} onChange={this.handleChangeChatTab}>
           <BottomNavigationAction label="My chats" icon={<RestoreIcon/>}/>
           <BottomNavigationAction label="Explore" icon={<ExploreIcon/>}/>

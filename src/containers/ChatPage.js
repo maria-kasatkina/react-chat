@@ -2,27 +2,33 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { fetchAllChats, fetchMyChats, setActiveChat, addNewChat, joinChat, leaveChat, deleteChat } from '../actions/chats';
 import { logout } from '../actions/auth';
-import { sendMessage } from '../actions/messages';
 import { editUserProfile } from '../actions/users';
+import { sendMessage, mountChat, unmountChat, socketsConnect } from '../actions/sockets';
 import * as fromChats from '../reducers/chats';
 import ChatPage from '../components/ChatPage';
 import {isMember, isCreator, isChatMember} from "../reducers";
 
-const mapStateToProps = state => ({
+const mapStateToProps = state => {
 
-  chats: {
-    all: fromChats.getByIds(state.chats, state.chats.allIds),
-    my: fromChats.getByIds(state.chats, state.chats.myIds),
-    activeChat: fromChats.getById(state.chats, state.chats.activeId)
-  },
-  currentUser:{
-    ...state.auth.user,
-    isMember: isMember(state, fromChats.getById(state.chats, state.chats.activeId)),
-    isCreator: isCreator(state, fromChats.getById(state.chats, state.chats.activeId)),
-    isChatMember: isChatMember(state, fromChats.getById(state.chats, state.chats.activeId))
-  },
-  messages: state.messages
-});
+  const activeChat = fromChats.getById(state.chats, state.chats.activeId);
+
+  return {
+    chats: {
+      all: fromChats.getByIds(state.chats, state.chats.allIds),
+      my: fromChats.getByIds(state.chats, state.chats.myIds),
+      activeChat: activeChat
+    },
+    currentUser: {
+      ...state.auth.user,
+      isMember: isMember(state, activeChat),
+      isCreator: isCreator(state, activeChat),
+      isChatMember: isChatMember(state, activeChat)
+    },
+    messages: state.messages,
+    error: state.services.errors.chat,
+    isConnected: state.services.isConnected
+  };
+};
 
 const mapDispatchToProps = dispatch => bindActionCreators({
     fetchAllChats,
@@ -32,9 +38,12 @@ const mapDispatchToProps = dispatch => bindActionCreators({
     joinChat,
     leaveChat,
     deleteChat,
-    sendMessage,
     logout,
-    editUserProfile
+    editUserProfile,
+    sendMessage,
+    mountChat,
+    unmountChat,
+    socketsConnect
   },
   dispatch,
 );
