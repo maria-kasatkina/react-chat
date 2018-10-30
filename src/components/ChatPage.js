@@ -3,7 +3,6 @@ import Sidebar from './Sidebar'
 import ChatHeader from './ChatHeader';
 import Chat from './Chat';
 import { withStyles } from '@material-ui/core/styles';
-import {chatList, messageList} from '../mock-data';
 
 const styles = theme => ({
   root: {
@@ -20,14 +19,70 @@ const styles = theme => ({
   }
 });
 
-const ChatPage = ({classes}) => (
-  <div className={classes.root}>
-    <div className={classes.appFrame}>
-      <ChatHeader/>
-      <Sidebar chatList={chatList} />
-      <Chat messageList={messageList}/>
-    </div>
-  </div>
-);
+class ChatPage extends React.Component {
+
+  componentDidMount(){
+    const { fetchAllChats, fetchMyChats, match, setActiveChat} = this.props;
+
+    Promise.all([
+      fetchAllChats(),
+      fetchMyChats()
+    ])
+      .then(() => {
+        const { chatId } = match.params;
+        if (chatId) {
+          setActiveChat(chatId);
+        }
+      });
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { match : {params}, setActiveChat } = this.props;
+    const { params: newParams } = nextProps.match;
+
+    if (newParams && newParams.chatId && params.chatId !== newParams.chatId){
+      setActiveChat(newParams.chatId);
+    }
+  }
+
+  render() {
+    const {
+      classes,
+      chats,
+      messages,
+      currentUser,
+      addNewChat,
+      joinChat,
+      leaveChat,
+      deleteChat,
+      sendMessage,
+      editUserProfile,
+      logout
+    } = this.props;
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
+          <ChatHeader
+            activeChat={chats.activeChat}
+            currentUser={currentUser}
+            editUserProfile={editUserProfile}
+            leaveChat={leaveChat}
+            deleteChat={deleteChat}
+            logout={logout} />
+          <Sidebar chats={chats} addNewChat={addNewChat}/>
+          <Chat
+            messageList={messages}
+            currentUser={currentUser}
+            sendMessage={sendMessage}
+            joinChat ={joinChat}
+            activeChat = {chats.activeChat}
+          />
+        </div>
+      </div>
+    )
+  }
+}
+
 
 export default withStyles(styles)(ChatPage);

@@ -25,31 +25,69 @@ const styles = theme => ({
   toolbar: theme.mixins.toolbar,
 });
 
-const Sidebar = ({classes, chatList}) => (
-  <Drawer
-    variant="permanent"
-    classes={{
-      paper: classes.drawerPaper,
-    }}
-  >
-    <div className={classes.toolbar} >
-      <TextField
-        fullWidth
-        id="standard-search"
-        label="Search field"
-        type="search"
-        className={classes.textField}
-      />
-    </div>
-    <Divider />
-    <ChatList chatList={chatList}/>
-    <AddChatButton />
-    <BottomNavigation showLabels>
-      <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
-      <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
-    </BottomNavigation>
-  </Drawer>
-);
+class Sidebar extends React.Component {
+
+  state = {
+    chatTabValue: 0,
+    searchValue: ''
+  };
+
+  handleChangeChatTab = (event, value) => {
+    this.setState({ chatTabValue: value });
+  };
+
+  handleInputChange = (event) => {
+    event.persist();
+    this.setState({
+      searchValue: event.target.value,
+    });
+  };
+
+  searching = (chats, searchValue) => {
+    return chats
+      .filter(chat => chat.title
+        .toLowerCase()
+        .includes(searchValue.toLowerCase())
+      )
+      .sort((one, two) =>
+        one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1
+      );
+  };
+
+  render() {
+
+    const {classes, chats, addNewChat} = this.props;
+    const {chatTabValue, searchValue} = this.state;
+
+    return (
+      <Drawer
+        variant="permanent"
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.toolbar}>
+          <TextField
+            fullWidth
+            id="chat-search"
+            label="Search field"
+            type="search"
+            value={searchValue}
+            className={classes.textField}
+            onChange={this.handleInputChange}
+          />
+        </div>
+        <Divider/>
+        <ChatList chatList={(chatTabValue === 0)? this.searching(chats.my, searchValue) : this.searching(chats.all, searchValue)}/>
+        <AddChatButton addNewChat={addNewChat}/>
+        <BottomNavigation showLabels  value={chatTabValue} onChange={this.handleChangeChatTab}>
+          <BottomNavigationAction label="My chats" icon={<RestoreIcon/>}/>
+          <BottomNavigationAction label="Explore" icon={<ExploreIcon/>}/>
+        </BottomNavigation>
+      </Drawer>
+    )
+  }
+}
 
 export default withStyles(styles)(Sidebar);
 

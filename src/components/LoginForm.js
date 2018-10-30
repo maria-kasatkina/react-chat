@@ -1,11 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
-const styles  = theme => ({
-
-});
 
 class LoginForm extends React.Component {
 
@@ -34,13 +29,10 @@ class LoginForm extends React.Component {
   handleSubmit = (event) => {
     event.preventDefault();
     const {username, password} = this.state;
-    console.log('Login', username.value, password.value);
     this.props.onSubmit(username.value, password.value);
-
   };
 
   render() {
-    const {classes} = this.props;
     const {username, password} = this.state;
 
     return (
@@ -50,7 +42,6 @@ class LoginForm extends React.Component {
           name="username"
           required
           fullWidth
-          className={classes.textField}
           margin="normal"
           value={username.value}
           onChange={this.handleInputChange}
@@ -62,7 +53,6 @@ class LoginForm extends React.Component {
           required
           fullWidth
           type="password"
-          className={classes.textField}
           margin="normal"
           value={password.value}
           onChange={this.handleInputChange}
@@ -80,5 +70,4 @@ class LoginForm extends React.Component {
   }
 }
 
-
-export default withStyles(styles)(LoginForm);
+export default LoginForm;

@@ -1,11 +1,6 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-
-const styles  = theme => ({
-
-});
 
 class RegistrationForm extends React.Component {
 
@@ -43,22 +38,19 @@ class RegistrationForm extends React.Component {
       repeatPassword: { ...repeatPassword, isValid },
     });
     return isValid;
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
     if (!this.validate()) {
       return;
     }
-    const {username, password, repeatPassword} = this.state;
-    console.log('Register', username.value, password.value, repeatPassword.value);
-
+    const {username, password} = this.state;
     this.props.onSubmit(username.value, password.value);
-
   };
 
   render() {
-    const {classes} = this.props;
+
     const {username, password, repeatPassword} = this.state;
 
     return (
@@ -68,7 +60,6 @@ class RegistrationForm extends React.Component {
           name="username"
           required
           fullWidth
-          className={classes.textField}
           margin="normal"
           value={username.value}
           onChange={this.handleInputChange}
@@ -80,7 +71,6 @@ class RegistrationForm extends React.Component {
           required
           fullWidth
           type="password"
-          className={classes.textField}
           margin="normal"
           value={password.value}
           onChange={this.handleInputChange}
@@ -92,7 +82,6 @@ class RegistrationForm extends React.Component {
           required
           fullWidth
           type="password"
-          className={classes.textField}
           margin="normal"
           value={repeatPassword.value}
           onChange={this.handleInputChange}
@@ -110,5 +99,4 @@ class RegistrationForm extends React.Component {
   }
 }
 
-
-export default withStyles(styles)(RegistrationForm);
+export default RegistrationForm;
