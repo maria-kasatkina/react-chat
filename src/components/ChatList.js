@@ -10,10 +10,10 @@ const styles = theme => ({
   },
 });
 
-const ChatList = ({classes, chatList}) => (
+const ChatList = ({classes, chatList, disabled}) => (
   <List className={classes.chatList} component="nav">
     {chatList && chatList.map((chatItem) => (
-      <ChatListItem key={chatItem._id} {...chatItem} chatId={chatItem._id}/>
+      <ChatListItem disabled={disabled} key={chatItem._id} {...chatItem} chatId={chatItem._id}/>
     ))}
   </List>
 );

@@ -40,18 +40,20 @@ class NewMessageBlock extends React.Component {
 
   handleJoinChat = (event) => {
     event.persist();
-    this.props.joinChat(this.props.activeChat._id);
+    this.props.onJoinButtonClick();
   };
 
   render() {
 
-    const {classes, isChatMember} = this.props;
+    const {classes, isChatMember, disabled} = this.props;
+
     return (
       <div className={classes.newMessageBlock}>
         <Paper className={classes.messageWrapper}>
           {isChatMember ?
             <Input
               fullWidth
+              disabled={disabled}
               name="content"
               value={this.state.content}
               placeholder="Type your message..."
@@ -59,7 +61,13 @@ class NewMessageBlock extends React.Component {
               onKeyPress={this.handleSendMessage}
             />
             :
-            <Button fullWidth color="primary" variant="contained" onClick={this.handleJoinChat}>
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              onClick={this.handleJoinChat}
+              disabled={disabled}
+            >
               Join chat
             </Button>
           }

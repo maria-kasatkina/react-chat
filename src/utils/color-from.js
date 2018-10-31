@@ -1,7 +1,6 @@
 import purple from '@material-ui/core/colors/purple';
 import red from '@material-ui/core/colors/red';
 import deepPurple from '@material-ui/core/colors/deepPurple';
-import indigo from '@material-ui/core/colors/indigo';
 import cyan from '@material-ui/core/colors/cyan';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import teal from '@material-ui/core/colors/teal';
@@ -14,7 +13,7 @@ import grey from '@material-ui/core/colors/grey';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
 const colors = [
-  purple, red, deepPurple, indigo, cyan, lightBlue, teal, green,
+  purple, red, deepPurple, cyan, lightBlue, teal, green,
   lime, amber, orange, deepOrange, grey, blueGrey
 ];
 

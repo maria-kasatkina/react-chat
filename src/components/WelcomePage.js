@@ -10,6 +10,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import {Redirect} from 'react-router-dom';
+import ErrorMessage from "./ErrorMessage";
 
 const styles  = theme => ({
   tabsPaper: {
@@ -33,7 +34,7 @@ class WelcomePage extends React.Component {
   };
 
   render() {
-    const { classes, signup, login, isAuthenticated } = this.props;
+    const { classes, signup, login, isAuthenticated, error } = this.props;
     const { activeTab } = this.state;
 
     if (isAuthenticated){
@@ -70,6 +71,7 @@ class WelcomePage extends React.Component {
             </Paper>
           </Grid>
         </Grid>
+        <ErrorMessage error={error} />
       </React.Fragment>
     );
   }
