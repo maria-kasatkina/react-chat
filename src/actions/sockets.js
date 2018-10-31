@@ -61,20 +61,20 @@ export function socketsConnect(){
     socket.on('new-chat', ({chat}) => {
       dispatch({
         type: types.RECEIVE_NEW_CHAT,
-        payload: chat
+        payload: {chat}
       })
     });
 
-    socket.on('deleted_chat', ({chat}) => {
+    socket.on('deleted-chat', ({chat}) => {
       const {activeId} = getState().chats;
 
       dispatch({
         type: types.RECEIVE_DELETED_CHAT,
-        payload: chat
+        payload: {chat}
       });
 
       if (activeId === chat._id){
-        dispatch(redirect('/chat'));
+        dispatch(redirect('chat'));
       }
     });
 
