@@ -1,24 +1,23 @@
-import fetch from "isomorphic-fetch";
+import fetch from 'isomorphic-fetch';
 
-export default function callApi(endpoint, token, options, payload){
-
+export default function callApi(endpoint, token, options, payload) {
   const authHeaders = token ? {
-    'Authorization': `Bearer ${token}`,
-  }: {};
+    Authorization: `Bearer ${token}`,
+  } : {};
   return fetch(`http://localhost:8000/v1/${endpoint}`, {
     method: 'GET',
     headers: {
-      'Content-type':'application/json',
-      'Accept': 'application/json',
-      ...authHeaders
+      'Content-type': 'application/json',
+      Accept: 'application/json',
+      ...authHeaders,
     },
     body: JSON.stringify(payload),
-    ...options
+    ...options,
   }).then(response => response.json())
-    .then(json => {
+    .then((json) => {
       if (json.success) {
         return json;
       }
       throw new Error(json.message);
-    })
+    });
 }

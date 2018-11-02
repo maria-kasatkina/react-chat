@@ -10,7 +10,7 @@ const styles = theme => ({
   addChatButton: {
     position: 'absolute',
     right: '30px',
-    bottom: '60px'
+    bottom: '60px',
   },
   paper: {
     position: 'absolute',
@@ -22,48 +22,49 @@ const styles = theme => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 });
 
 
 class AddChatButton extends React.Component {
-
   state = {
-    open: false
+    isOpen: false,
   };
 
   toggleModal = () => {
-    this.setState({ open: !this.state.open });
+    const { isOpen } = this.state;
+    this.setState({ isOpen: !isOpen });
   };
 
   render() {
-    const {classes, addNewChat, disabled} = this.props;
+    const { classes, addNewChat, disabled } = this.props;
+    const { isOpen } = this.state;
     return (
       <React.Fragment>
-        <Button variant="fab"
+        <Button
+          variant="fab"
           disabled={disabled}
           color="primary"
           aria-label="Add"
           className={classes.addChatButton}
           onClick={this.toggleModal}
         >
-          <AddIcon/>
+          <AddIcon />
         </Button>
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.open}
+          open={isOpen}
           onClose={this.toggleModal}
           className={classes.modal}
         >
           <Paper className={classes.paper}>
-            <AddChatForm onSubmit={addNewChat} toggleModal={this.toggleModal}/>
+            <AddChatForm onSubmit={addNewChat} toggleModal={this.toggleModal} />
           </Paper>
         </Modal>
       </React.Fragment>
-    )
+    );
   }
-
 }
 export default withStyles(styles)(AddChatButton);

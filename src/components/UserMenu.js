@@ -20,24 +20,24 @@ const styles = theme => ({
   modal: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
 
 });
 
 class UserMenu extends React.Component {
-
   state = {
     anchorEl: null,
-    openModal: false
+    openModal: false,
   };
 
   toggleModal = () => {
-    this.setState({ openModal: !this.state.openModal });
+    const { openModal } = this.state;
+    this.setState({ openModal: !openModal });
     this.handleMenuClose();
   };
 
-  handleMenuClick = event => {
+  handleMenuClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -46,13 +46,15 @@ class UserMenu extends React.Component {
   };
 
   handleLogoutClick = () => {
-    this.props.onLogout();
+    const { onLogout } = this.props;
+    onLogout();
   };
 
-  render(){
-
-    const { classes, currentUser, editUserProfile, disabled } = this.props;
-    const { anchorEl } = this.state;
+  render() {
+    const {
+      classes, currentUser, editUserProfile, disabled,
+    } = this.props;
+    const { anchorEl, openModal } = this.state;
 
     return (
       <React.Fragment>
@@ -76,12 +78,16 @@ class UserMenu extends React.Component {
         <Modal
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
-          open={this.state.openModal}
+          open={openModal}
           onClose={this.toggleModal}
           className={classes.modal}
         >
           <Paper className={classes.paper}>
-            <UserProfileForm closeModal={this.toggleModal} currentUser={currentUser} onSubmit={editUserProfile}/>
+            <UserProfileForm
+              closeModal={this.toggleModal}
+              currentUser={currentUser}
+              onSubmit={editUserProfile}
+            />
           </Paper>
         </Modal>
       </React.Fragment>

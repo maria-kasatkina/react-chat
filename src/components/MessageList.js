@@ -1,52 +1,57 @@
+/* eslint no-underscore-dangle: 0 */
 import React from 'react';
-import MessageItem from './MessageItem';
-import {withStyles} from '@material-ui/core/styles/index';
+import { withStyles } from '@material-ui/core/styles/index';
 import Typography from '@material-ui/core/Typography';
+import MessageItem from './MessageItem';
 
-const styles = theme => ({
+const styles = () => ({
   messagesWrapper: {
     height: 'calc(100% - 120px)',
     overflowY: 'scroll',
-    paddingBottom: '120px'
+    paddingBottom: '120px',
   },
 
   noMessageWrapper: {
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 });
 
-class MessageList  extends React.Component {
+class MessageList extends React.Component {
+  componentDidMount() {
+    this.scrollDownHistory();
+  }
 
   componentDidUpdate() {
     this.scrollDownHistory();
   }
 
-  componentDidMount() {
-    this.scrollDownHistory();
-  }
 
   scrollDownHistory() {
-    const messagesWrapper = this.refs.messagesWrapper;
-
-    if (messagesWrapper) {
-      messagesWrapper.scrollTop = messagesWrapper.scrollHeight;
+    if (this.messagesWrapper) {
+      this.messagesWrapper.scrollTop = this.messagesWrapper.scrollHeight;
     }
   }
 
   render() {
-    const {classes, messageList, currentUser} = this.props;
+    const { classes, messageList, currentUser } = this.props;
 
-    if (messageList && messageList.length > 0)
+    if (messageList && messageList.length > 0) {
       return (
-        <div className={classes.messagesWrapper} ref="messagesWrapper">
-          {messageList && messageList.map((messageItem) => (
-            <MessageItem key={messageItem._id} currentUser={currentUser} {...messageItem}/>
+        <div
+          className={classes.messagesWrapper}
+          ref={(wrapper) => {
+            this.messagesWrapper = wrapper;
+          }}
+        >
+          {messageList && messageList.map(messageItem => (
+            <MessageItem key={messageItem._id} currentUser={currentUser} {...messageItem} />
           ))}
         </div>
       );
+    }
 
     return (
       <div className={classes.noMessageWrapper}>
@@ -59,4 +64,3 @@ class MessageList  extends React.Component {
 }
 
 export default withStyles(styles)(MessageList);
-

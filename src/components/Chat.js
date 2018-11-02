@@ -1,22 +1,22 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
-import MessageList from './MessageList';
-import NewMessageBlock from './NewMessageBlock';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import MessageList from './MessageList';
+import NewMessageBlock from './NewMessageBlock';
 
 const styles = theme => ({
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
-    paddingTop:'66px'
+    paddingTop: '66px',
   },
 
   infoBlock: {
     display: 'flex',
     height: '100%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   paper: {
@@ -28,31 +28,36 @@ const styles = theme => ({
   },
 });
 
-const Chat = ({classes, messageList, sendMessage, joinChat, activeChat, currentUser, isConnected}) => (
+const Chat = ({
+  classes, messageList, sendMessage, joinChat, activeChat, currentUser, isConnected,
+}) => (
   <main className={classes.content}>
-    {activeChat ?
-      <React.Fragment>
-        <MessageList
-          messageList={messageList}
-          activeChat={activeChat}
-          currentUser={currentUser}
-        />
-        <NewMessageBlock
-          disabled={!isConnected}
-          sendMessage = {sendMessage}
-          isChatMember={currentUser.isChatMember}
-          onJoinButtonClick={() => joinChat(activeChat._id)}
-        />
-      </React.Fragment>
-    :
-      <div className={classes.infoBlock}>
-        <Paper className={classes.paper}>
-          <Typography variant="display1" gutterBottom>
+    {activeChat
+      ? (
+        <React.Fragment>
+          <MessageList
+            messageList={messageList}
+            activeChat={activeChat}
+            currentUser={currentUser}
+          />
+          <NewMessageBlock
+            disabled={!isConnected}
+            sendMessage={sendMessage}
+            isChatMember={currentUser.isChatMember}
+            // eslint-disable-next-line
+            onJoinButtonClick={() => joinChat(activeChat._id)}
+          />
+        </React.Fragment>
+      )
+      : (
+        <div className={classes.infoBlock}>
+          <Paper className={classes.paper}>
+            <Typography variant="display1" gutterBottom>
             Start messaging…
-          </Typography>
-        </Paper>
-      </div>
-    }
+            </Typography>
+          </Paper>
+        </div>
+      )}
   </main>
 );
 

@@ -20,16 +20,15 @@ const styles = theme => ({
   drawerPaper: {
     position: 'relative',
     width: 320,
-    overflowY: 'initial'
+    overflowY: 'initial',
   },
   toolbar: theme.mixins.toolbar,
 });
 
 class Sidebar extends React.Component {
-
   state = {
     chatTabValue: 0,
-    searchValue: ''
+    searchValue: '',
   };
 
   handleChangeChatTab = (event, value) => {
@@ -43,21 +42,20 @@ class Sidebar extends React.Component {
     });
   };
 
-  searching = (chats, searchValue) => {
+  searching = (chats) => {
+    const { searchValue } = this.state;
     return chats
       .filter(chat => chat.title
         .toLowerCase()
-        .includes(searchValue.toLowerCase())
-      )
-      .sort((one, two) =>
-        one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1
-      );
-  };
+        .includes(searchValue.toLowerCase()))
+      .sort((one, two) => (one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1));
+  }
 
   render() {
-
-    const {classes, chats, addNewChat, isConnected} = this.props;
-    const {chatTabValue, searchValue} = this.state;
+    const {
+      classes, chats, addNewChat, isConnected,
+    } = this.props;
+    const { chatTabValue, searchValue } = this.state;
 
     return (
       <Drawer
@@ -77,23 +75,22 @@ class Sidebar extends React.Component {
             onChange={this.handleInputChange}
           />
         </div>
-        <Divider/>
+        <Divider />
         <ChatList
-          chatList={(chatTabValue === 0)? this.searching(chats.my, searchValue) : this.searching(chats.all, searchValue)}
+          chatList={this.searching((chatTabValue === 0) ? chats.my : chats.all)}
           disabled={!isConnected}
         />
         <AddChatButton
           addNewChat={addNewChat}
           disabled={!isConnected}
         />
-        <BottomNavigation showLabels  value={chatTabValue} onChange={this.handleChangeChatTab}>
-          <BottomNavigationAction label="My chats" icon={<RestoreIcon/>}/>
-          <BottomNavigationAction label="Explore" icon={<ExploreIcon/>}/>
+        <BottomNavigation showLabels value={chatTabValue} onChange={this.handleChangeChatTab}>
+          <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />
         </BottomNavigation>
       </Drawer>
-    )
+    );
   }
 }
 
 export default withStyles(styles)(Sidebar);
-

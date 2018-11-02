@@ -4,30 +4,30 @@ import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
 
-const styles = theme => ({
+const styles = () => ({
   newMessageBlock: {
     width: 'calc(100% - 420px)',
     bottom: 0,
     padding: '24px',
-    position: 'fixed'
+    position: 'fixed',
   },
   messageWrapper: {
     width: '100%',
-    padding: '20px'
-  }
+    padding: '20px',
+  },
 });
 
 class NewMessageBlock extends React.Component {
-
   state = {
     content: '',
   };
 
   handleSendMessage = (event) => {
     const { content } = this.state;
+    const { sendMessage } = this.props;
     if (event.key === 'Enter' && content) {
-      this.props.sendMessage(content);
-      this.setState({ content: ''});
+      sendMessage(content);
+      this.setState({ content: '' });
     }
   };
 
@@ -40,37 +40,40 @@ class NewMessageBlock extends React.Component {
 
   handleJoinChat = (event) => {
     event.persist();
-    this.props.onJoinButtonClick();
+    const { onJoinButtonClick } = this.props;
+    onJoinButtonClick();
   };
 
   render() {
-
-    const {classes, isChatMember, disabled} = this.props;
+    const { classes, isChatMember, disabled } = this.props;
+    const { content } = this.state;
 
     return (
       <div className={classes.newMessageBlock}>
         <Paper className={classes.messageWrapper}>
-          {isChatMember ?
-            <Input
-              fullWidth
-              disabled={disabled}
-              name="content"
-              value={this.state.content}
-              placeholder="Type your message..."
-              onChange={this.handleInputChange}
-              onKeyPress={this.handleSendMessage}
-            />
-            :
-            <Button
-              fullWidth
-              color="primary"
-              variant="contained"
-              onClick={this.handleJoinChat}
-              disabled={disabled}
-            >
+          {isChatMember
+            ? (
+              <Input
+                fullWidth
+                disabled={disabled}
+                name="content"
+                value={content}
+                placeholder="Type your message..."
+                onChange={this.handleInputChange}
+                onKeyPress={this.handleSendMessage}
+              />
+            )
+            : (
+              <Button
+                fullWidth
+                color="primary"
+                variant="contained"
+                onClick={this.handleJoinChat}
+                disabled={disabled}
+              >
               Join chat
-            </Button>
-          }
+              </Button>
+            )}
         </Paper>
       </div>
     );

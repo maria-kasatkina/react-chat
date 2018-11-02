@@ -4,26 +4,28 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 class UserProfileForm extends React.Component {
-
+  /* eslint-disable react/destructuring-assignment */
   state = {
     username: this.props.currentUser.username,
     firstName: this.props.currentUser.firstName,
-    lastName: this.props.currentUser.lastName
+    lastName: this.props.currentUser.lastName,
   };
+  /* eslint-enable react/destructuring-assignment */
 
   handleInputChange = (event) => {
     event.persist();
-    const {name, value} = event.target;
-    this.setState((prevState) => ({
-      [name]: value
-    }))
+    const { name, value } = event.target;
+    this.setState({
+      [name]: value,
+    });
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const {username, firstName, lastName} = this.state;
-    this.props.onSubmit(username, firstName, lastName);
-    this.props.closeModal();
+    const { username, firstName, lastName } = this.state;
+    const { onSubmit, closeModal } = this.props;
+    onSubmit(username, firstName, lastName);
+    closeModal();
   };
 
   render() {
@@ -68,7 +70,7 @@ class UserProfileForm extends React.Component {
           Save
         </Button>
       </form>
-    )
+    );
   }
 }
 

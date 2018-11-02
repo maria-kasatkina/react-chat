@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux'
+import { Provider } from 'react-redux';
+import 'typeface-roboto';
 import configureStore from './store';
 import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import 'typeface-roboto'
+
 
 const store = configureStore();
 
@@ -14,7 +15,7 @@ const render = (Component) => {
     <Provider store={store}>
       <Component />
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('root'),
   );
 };
 
@@ -23,9 +24,8 @@ render(App);
 if (module.hot) {
   module.hot.accept('./components/App', () => {
     render(App);
-  })
+  });
 }
-
 
 
 // If you want your app to work offline and load faster, you can change

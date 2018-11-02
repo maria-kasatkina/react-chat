@@ -1,5 +1,5 @@
-import * as types from '../constants';
 import { combineReducers } from 'redux';
+import * as types from '../constants';
 
 const initialState = {
 
@@ -16,15 +16,15 @@ const initialState = {
     leaveChat: false,
     deleteChat: false,
     sockets: false,
-    editUser:false
+    editUser: false,
   },
 
   errors: {
     auth: null,
-    chat: null
+    chat: null,
   },
 
-  isConnected: false
+  isConnected: false,
 
 };
 
@@ -102,7 +102,7 @@ export const isFetching = (state = initialState.isFetching, action) => {
 };
 
 export const errors = (state = initialState.errors, action) => {
-  switch (action.type){
+  switch (action.type) {
     case types.SIGNUP_FAILURE:
     case types.LOGIN_FAILURE:
     case types.LOGOUT_FAILURE:
@@ -110,7 +110,7 @@ export const errors = (state = initialState.errors, action) => {
     case types.SIGNUP_SUCCESS:
     case types.LOGIN_SUCCESS:
     case types.LOGOUT_SUCCESS:
-      return { ...state, auth: null};
+      return { ...state, auth: null };
 
     case types.FETCH_ALL_CHATS_FAILURE:
     case types.FETCH_MY_CHATS_FAILURE:
@@ -138,7 +138,7 @@ export const errors = (state = initialState.errors, action) => {
 };
 
 export const isConnected = (state = initialState.isConnected, action) => {
-  switch (action.type){
+  switch (action.type) {
     case types.SOCKETS_CONNECTION_MISSING:
     case types.SOCKETS_CONNECTION_FAILURE:
       return false;
@@ -152,5 +152,5 @@ export const isConnected = (state = initialState.isConnected, action) => {
 export default combineReducers({
   isFetching,
   errors,
-  isConnected
+  isConnected,
 });

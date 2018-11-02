@@ -5,12 +5,11 @@ import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 
 class ChatMenu extends React.Component {
-
   state = {
-    anchorEl: null
+    anchorEl: null,
   };
 
-  handleMenuClick = event => {
+  handleMenuClick = (event) => {
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -19,17 +18,18 @@ class ChatMenu extends React.Component {
   };
 
   handleLeaveChat = () => {
-    this.props.onLeaveChat();
+    const { onLeaveChat } = this.props;
+    onLeaveChat();
     this.handleMenuClose();
   };
 
   handleDeleteChat = () => {
-    this.props.onDeleteChat();
+    const { onDeleteChat } = this.props;
+    onDeleteChat();
     this.handleMenuClose();
   };
 
-  render(){
-
+  render() {
     const { anchorEl } = this.state;
     const { currentUser, disabled } = this.props;
 
@@ -51,7 +51,7 @@ class ChatMenu extends React.Component {
           {currentUser.isMember && <MenuItem onClick={this.handleLeaveChat}>Leave</MenuItem>}
         </Menu>
       </React.Fragment>
-    )
+    );
   }
 }
 

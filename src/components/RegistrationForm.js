@@ -3,31 +3,30 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 class RegistrationForm extends React.Component {
-
   state = {
     username: {
       value: '',
-      isValid: true
+      isValid: true,
     },
     password: {
       value: '',
-      isValid: true
+      isValid: true,
     },
-    repeatPassword:{
+    repeatPassword: {
       value: '',
-      isValid: true
-    }
+      isValid: true,
+    },
   };
 
   handleInputChange = (event) => {
     event.persist();
-    const {name, value} = event.target;
-    this.setState((prevState) => ({
+    const { name, value } = event.target;
+    this.setState(prevState => ({
       [name]: {
         ...prevState[name],
-        value
-      }
-    }))
+        value,
+      },
+    }));
   };
 
   validate = () => {
@@ -45,13 +44,13 @@ class RegistrationForm extends React.Component {
     if (!this.validate()) {
       return;
     }
-    const {username, password} = this.state;
-    this.props.onSubmit(username.value, password.value);
+    const { username, password } = this.state;
+    const { onSubmit } = this.props;
+    onSubmit(username.value, password.value);
   };
 
   render() {
-
-    const {username, password, repeatPassword} = this.state;
+    const { username, password, repeatPassword } = this.state;
 
     return (
       <form onSubmit={this.handleSubmit}>
@@ -91,11 +90,12 @@ class RegistrationForm extends React.Component {
           variant="contained"
           color="primary"
           type="submit"
-          fullWidth>
+          fullWidth
+        >
           Sign up
         </Button>
       </form>
-    )
+    );
   }
 }
 

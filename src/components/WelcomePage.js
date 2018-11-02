@@ -2,31 +2,30 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import {Redirect} from 'react-router-dom';
-import ErrorMessage from "./ErrorMessage";
+import { Redirect } from 'react-router-dom';
+import RegistrationForm from './RegistrationForm';
+import LoginForm from './LoginForm';
+import ErrorMessage from './ErrorMessage';
 
-const styles  = theme => ({
+const styles = theme => ({
   tabsPaper: {
     backgroundColor: theme.palette.background.paper,
     width: 500,
-    marginTop: 80
+    marginTop: 80,
   },
   tabContent: {
-    padding: 24
-  }
+    padding: 24,
+  },
 });
 
 class WelcomePage extends React.Component {
-
   state = {
-    activeTab: 0
+    activeTab: 0,
   };
 
   handleChange = (event, activeTab) => {
@@ -34,16 +33,18 @@ class WelcomePage extends React.Component {
   };
 
   render() {
-    const { classes, signup, login, isAuthenticated, error } = this.props;
+    const {
+      classes, signup, login, isAuthenticated, error,
+    } = this.props;
     const { activeTab } = this.state;
 
-    if (isAuthenticated){
+    if (isAuthenticated) {
       return (
-        <Redirect to="/chat"/>
+        <Redirect to="/chat" />
       );
     }
 
-    return(
+    return (
       <React.Fragment>
         <AppBar
           position="absolute"
@@ -56,7 +57,7 @@ class WelcomePage extends React.Component {
           </Toolbar>
         </AppBar>
         <Grid container justify="center" alignItems="center">
-          <Grid item >
+          <Grid item>
             <Paper className={classes.tabsPaper}>
               <AppBar position="static" color="default">
                 <Tabs value={activeTab} onChange={this.handleChange} fullWidth>
@@ -65,8 +66,8 @@ class WelcomePage extends React.Component {
                 </Tabs>
               </AppBar>
               <div className={classes.tabContent}>
-              {activeTab === 0 && <LoginForm onSubmit={login} />}
-              {activeTab === 1 && <RegistrationForm onSubmit={signup} />}
+                {activeTab === 0 && <LoginForm onSubmit={login} />}
+                {activeTab === 1 && <RegistrationForm onSubmit={signup} />}
               </div>
             </Paper>
           </Grid>

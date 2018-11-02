@@ -14,11 +14,10 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 
 const colors = [
   purple, red, deepPurple, cyan, lightBlue, teal, green,
-  lime, amber, orange, deepOrange, grey, blueGrey
+  lime, amber, orange, deepOrange, grey, blueGrey,
 ];
 
-export default function colorFrom(string){
-  
+export default function colorFrom(string) {
   try {
     const index = string
       .toString()
@@ -29,8 +28,9 @@ export default function colorFrom(string){
     const colorIndex = index % colors.length;
 
     return colors[colorIndex][500];
-  }catch (e) {
+  } catch (e) {
+    // eslint-disable-next-line
     console.log(e);
     return blueGrey[500];
   }
-};
+}

@@ -1,14 +1,14 @@
 import React from 'react';
-import Sidebar from './Sidebar'
+import { withStyles } from '@material-ui/core/styles';
+import Sidebar from './Sidebar';
 import ChatHeader from './ChatHeader';
 import Chat from './Chat';
-import { withStyles } from '@material-ui/core/styles';
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from './ErrorMessage';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1,
-    height: '100%'
+    height: '100%',
   },
   appFrame: {
     height: '100%',
@@ -17,17 +17,18 @@ const styles = theme => ({
     position: 'relative',
     display: 'flex',
     width: '100%',
-  }
+  },
 });
 
 class ChatPage extends React.Component {
-
-  componentDidMount(){
-    const { fetchAllChats, fetchMyChats, match, setActiveChat, socketsConnect, mountChat} = this.props;
+  componentDidMount() {
+    const {
+      fetchAllChats, fetchMyChats, match, setActiveChat, socketsConnect, mountChat,
+    } = this.props;
 
     Promise.all([
       fetchAllChats(),
-      fetchMyChats()
+      fetchMyChats(),
     ])
       .then(() => {
         socketsConnect();
@@ -42,10 +43,12 @@ class ChatPage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { match : {params}, setActiveChat, mountChat, unmountChat } = this.props;
+    const {
+      match: { params }, setActiveChat, mountChat, unmountChat,
+    } = this.props;
     const { params: newParams } = nextProps.match;
 
-    if (newParams && newParams.chatId && params.chatId !== newParams.chatId){
+    if (newParams && newParams.chatId && params.chatId !== newParams.chatId) {
       setActiveChat(newParams.chatId);
       unmountChat(params.chatId);
       mountChat(newParams.chatId);
@@ -66,7 +69,7 @@ class ChatPage extends React.Component {
       editUserProfile,
       logout,
       error,
-      isConnected
+      isConnected,
     } = this.props;
 
     return (
@@ -92,14 +95,14 @@ class ChatPage extends React.Component {
               messageList={messages}
               currentUser={currentUser}
               sendMessage={sendMessage}
-              joinChat ={joinChat}
-              activeChat = {chats.activeChat}
+              joinChat={joinChat}
+              activeChat={chats.activeChat}
             />
           </div>
         </div>
-        <ErrorMessage error={error}/>
+        <ErrorMessage error={error} />
       </React.Fragment>
-    )
+    );
   }
 }
 
