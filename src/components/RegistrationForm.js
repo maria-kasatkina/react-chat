@@ -86,12 +86,7 @@ class RegistrationForm extends React.Component {
           onChange={this.handleInputChange}
           error={!repeatPassword.isValid}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-        >
+        <Button variant="contained" color="primary" type="submit" fullWidth>
           Sign up
         </Button>
       </form>

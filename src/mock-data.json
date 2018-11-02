@@ -1,86 +1,110 @@
 {
-  "chatList": [{
+  "chatList": [
+    {
       "title": "First Chat",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "only for you",
       "date": "15 days ago"
-    },{
+    },
+    {
       "title": "Interesting chat",
       "date": "an hour ago"
-    },{
+    },
+    {
       "title": "myChat1",
       "date": "an hour ago"
-    },{
+    },
+    {
       "title": "myChat2",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat3",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat4",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat5",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat6",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat7",
       "date": "a month ago"
-    },{
+    },
+    {
       "title": "myChat8",
       "date": "a month ago"
     }
   ],
-  "messageList":[{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "second User",
-    "content": "Hi!",
-    "date": "a month ago"
-  },{
-    "sender": "me",
-    "content": "sjldfjls",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{
-    "sender": "first User",
-    "content": "Paper can be used to build surface or other elements for your application.",
-    "date": "a month ago"
-  },{ "sender": "first User",
-    "content": "Last last last.",
-    "date": "a month ago"
-  }
+  "messageList": [
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "second User",
+      "content": "Hi!",
+      "date": "a month ago"
+    },
+    {
+      "sender": "me",
+      "content": "sjldfjls",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Paper can be used to build surface or other elements for your application.",
+      "date": "a month ago"
+    },
+    {
+      "sender": "first User",
+      "content": "Last last last.",
+      "date": "a month ago"
+    }
   ]
 }

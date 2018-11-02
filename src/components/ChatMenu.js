@@ -35,10 +35,7 @@ class ChatMenu extends React.Component {
 
     return (
       <React.Fragment>
-        <IconButton
-          onClick={this.handleMenuClick}
-          disabled={disabled}
-        >
+        <IconButton onClick={this.handleMenuClick} disabled={disabled}>
           <MoreVertIcon />
         </IconButton>
         <Menu

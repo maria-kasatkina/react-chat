@@ -29,35 +29,35 @@ const styles = theme => ({
 });
 
 const Chat = ({
-  classes, messageList, sendMessage, joinChat, activeChat, currentUser, isConnected,
+  classes,
+  messageList,
+  sendMessage,
+  joinChat,
+  activeChat,
+  currentUser,
+  isConnected,
 }) => (
   <main className={classes.content}>
-    {activeChat
-      ? (
-        <React.Fragment>
-          <MessageList
-            messageList={messageList}
-            activeChat={activeChat}
-            currentUser={currentUser}
-          />
-          <NewMessageBlock
-            disabled={!isConnected}
-            sendMessage={sendMessage}
-            isChatMember={currentUser.isChatMember}
-            // eslint-disable-next-line
-            onJoinButtonClick={() => joinChat(activeChat._id)}
-          />
-        </React.Fragment>
-      )
-      : (
-        <div className={classes.infoBlock}>
-          <Paper className={classes.paper}>
-            <Typography variant="display1" gutterBottom>
+    {activeChat ? (
+      <React.Fragment>
+        <MessageList messageList={messageList} activeChat={activeChat} currentUser={currentUser} />
+        <NewMessageBlock
+          disabled={!isConnected}
+          sendMessage={sendMessage}
+          isChatMember={currentUser.isChatMember}
+          // eslint-disable-next-line
+          onJoinButtonClick={() => joinChat(activeChat._id)}
+        />
+      </React.Fragment>
+    ) : (
+      <div className={classes.infoBlock}>
+        <Paper className={classes.paper}>
+          <Typography variant="display1" gutterBottom>
             Start messaging…
-            </Typography>
-          </Paper>
-        </div>
-      )}
+          </Typography>
+        </Paper>
+      </div>
+    )}
   </main>
 );
 

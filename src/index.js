@@ -7,7 +7,6 @@ import App from './components/App';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
 
-
 const store = configureStore();
 
 const render = (Component) => {
@@ -26,7 +25,6 @@ if (module.hot) {
     render(App);
   });
 }
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

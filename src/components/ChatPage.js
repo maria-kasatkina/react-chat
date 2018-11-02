@@ -23,13 +23,15 @@ const styles = () => ({
 class ChatPage extends React.Component {
   componentDidMount() {
     const {
-      fetchAllChats, fetchMyChats, match, setActiveChat, socketsConnect, mountChat,
+      fetchAllChats,
+      fetchMyChats,
+      match,
+      setActiveChat,
+      socketsConnect,
+      mountChat,
     } = this.props;
 
-    Promise.all([
-      fetchAllChats(),
-      fetchMyChats(),
-    ])
+    Promise.all([fetchAllChats(), fetchMyChats()])
       .then(() => {
         socketsConnect();
       })
@@ -44,7 +46,10 @@ class ChatPage extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const {
-      match: { params }, setActiveChat, mountChat, unmountChat,
+      match: { params },
+      setActiveChat,
+      mountChat,
+      unmountChat,
     } = this.props;
     const { params: newParams } = nextProps.match;
 
@@ -85,11 +90,7 @@ class ChatPage extends React.Component {
               deleteChat={deleteChat}
               logout={logout}
             />
-            <Sidebar
-              isConnected={isConnected}
-              chats={chats}
-              addNewChat={addNewChat}
-            />
+            <Sidebar isConnected={isConnected} chats={chats} addNewChat={addNewChat} />
             <Chat
               isConnected={isConnected}
               messageList={messages}
@@ -105,6 +106,5 @@ class ChatPage extends React.Component {
     );
   }
 }
-
 
 export default withStyles(styles)(ChatPage);

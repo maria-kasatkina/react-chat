@@ -13,9 +13,10 @@ const styles = () => ({
 
 const ChatList = ({ classes, chatList, disabled }) => (
   <List className={classes.chatList} component="nav">
-    {chatList && chatList.map(chatItem => (
-      <ChatListItem disabled={disabled} key={chatItem._id} {...chatItem} chatId={chatItem._id} />
-    ))}
+    {chatList
+      && chatList.map(chatItem => (
+        <ChatListItem disabled={disabled} key={chatItem._id} {...chatItem} chatId={chatItem._id} />
+      ))}
   </List>
 );
 

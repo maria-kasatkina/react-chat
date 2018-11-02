@@ -11,7 +11,6 @@ import AddChatButton from './AddChatButton';
 import ChatList from './ChatList';
 
 const styles = theme => ({
-
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
@@ -45,11 +44,9 @@ class Sidebar extends React.Component {
   searching = (chats) => {
     const { searchValue } = this.state;
     return chats
-      .filter(chat => chat.title
-        .toLowerCase()
-        .includes(searchValue.toLowerCase()))
+      .filter(chat => chat.title.toLowerCase().includes(searchValue.toLowerCase()))
       .sort((one, two) => (one.title.toLowerCase() <= two.title.toLowerCase() ? -1 : 1));
-  }
+  };
 
   render() {
     const {
@@ -77,13 +74,10 @@ class Sidebar extends React.Component {
         </div>
         <Divider />
         <ChatList
-          chatList={this.searching((chatTabValue === 0) ? chats.my : chats.all)}
+          chatList={this.searching(chatTabValue === 0 ? chats.my : chats.all)}
           disabled={!isConnected}
         />
-        <AddChatButton
-          addNewChat={addNewChat}
-          disabled={!isConnected}
-        />
+        <AddChatButton addNewChat={addNewChat} disabled={!isConnected} />
         <BottomNavigation showLabels value={chatTabValue} onChange={this.handleChangeChatTab}>
           <BottomNavigationAction label="My chats" icon={<RestoreIcon />} />
           <BottomNavigationAction label="Explore" icon={<ExploreIcon />} />

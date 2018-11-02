@@ -38,54 +38,36 @@ const styles = () => ({
 const MessageItem = ({
   classes, sender, content, createdAt, statusMessage, currentUser,
 }) => {
-  const isMyMessage = (currentUser._id === sender._id);
-  const userAvatar = (<ChatAvatar colorFrom={sender.username}>{sender.username}</ChatAvatar>);
+  const isMyMessage = currentUser._id === sender._id;
+  const userAvatar = <ChatAvatar colorFrom={sender.username}>{sender.username}</ChatAvatar>;
 
   if (statusMessage) {
     return (
       <div className={classes.messageWrapper}>
         <Typography className={classes.statusMessage}>
-          <Typography
-            variant="caption"
-            style={{ color: getColor(sender.username) }}
-          >
+          <Typography variant="caption" style={{ color: getColor(sender.username) }}>
             {sender.username}
           </Typography>
           {content}
-          <Typography variant="caption">
-            {moment(createdAt).fromNow()}
-          </Typography>
+          <Typography variant="caption">{moment(createdAt).fromNow()}</Typography>
         </Typography>
       </div>
     );
   }
 
   return (
-    <div className={classNames(
-      classes.messageWrapper,
-      isMyMessage && classes.myMessageWrapper,
-    )}
-    >
+    <div className={classNames(classes.messageWrapper, isMyMessage && classes.myMessageWrapper)}>
       {!isMyMessage && userAvatar}
-      <Paper className={classNames(
-        classes.message,
-        isMyMessage && classes.myMessage,
-      )}
-      >
+      <Paper className={classNames(classes.message, isMyMessage && classes.myMessage)}>
         <Typography variant="caption" style={{ color: getColor(sender.username) }}>
           {sender.username}
         </Typography>
-        <Typography variant="body1">
-          {content}
-        </Typography>
-        <Typography variant="caption">
-          {moment(createdAt).fromNow()}
-        </Typography>
+        <Typography variant="body1">{content}</Typography>
+        <Typography variant="caption">{moment(createdAt).fromNow()}</Typography>
       </Paper>
       {isMyMessage && userAvatar}
     </div>
   );
 };
-
 
 export default withStyles(styles)(MessageItem);

@@ -56,12 +56,7 @@ class AddChatForm extends React.Component {
           margin="normal"
           onChange={this.handleInputChange}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-        >
+        <Button variant="contained" color="primary" type="submit" fullWidth>
           Create
         </Button>
       </form>

@@ -39,17 +39,12 @@ class WelcomePage extends React.Component {
     const { activeTab } = this.state;
 
     if (isAuthenticated) {
-      return (
-        <Redirect to="/chat" />
-      );
+      return <Redirect to="/chat" />;
     }
 
     return (
       <React.Fragment>
-        <AppBar
-          position="absolute"
-          className={classes.appBar}
-        >
+        <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
             <Typography variant="title" color="inherit" noWrap>
               Chat for a while

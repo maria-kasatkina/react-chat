@@ -2,7 +2,6 @@ import { combineReducers } from 'redux';
 import * as types from '../constants';
 
 const initialState = {
-
   isFetching: {
     signup: false,
     login: false,
@@ -25,7 +24,6 @@ const initialState = {
   },
 
   isConnected: false,
-
 };
 
 export const isFetching = (state = initialState.isFetching, action) => {

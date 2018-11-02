@@ -13,8 +13,19 @@ import grey from '@material-ui/core/colors/grey';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 
 const colors = [
-  purple, red, deepPurple, cyan, lightBlue, teal, green,
-  lime, amber, orange, deepOrange, grey, blueGrey,
+  purple,
+  red,
+  deepPurple,
+  cyan,
+  lightBlue,
+  teal,
+  green,
+  lime,
+  amber,
+  orange,
+  deepOrange,
+  grey,
+  blueGrey,
 ];
 
 export default function colorFrom(string) {

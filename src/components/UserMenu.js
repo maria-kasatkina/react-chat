@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import UserProfileForm from './UserProfileForm';
 
 const styles = theme => ({
-
   paper: {
     position: 'absolute',
     width: theme.spacing.unit * 50,
@@ -22,7 +21,6 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
   },
-
 });
 
 class UserMenu extends React.Component {
@@ -58,12 +56,7 @@ class UserMenu extends React.Component {
 
     return (
       <React.Fragment>
-        <Button
-          disabled={disabled}
-          color="inherit"
-          aria-label="Add"
-          onClick={this.handleMenuClick}
-        >
+        <Button disabled={disabled} color="inherit" aria-label="Add" onClick={this.handleMenuClick}>
           <AccountCircle />
         </Button>
         <Menu

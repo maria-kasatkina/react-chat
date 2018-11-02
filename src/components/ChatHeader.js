@@ -8,7 +8,7 @@ import UserMenu from './UserMenu';
 import ChatMenu from './ChatMenu';
 import ChatAvatar from './ChatAvatar';
 
-const styles = ({
+const styles = {
   appBar: {
     width: 'calc(100% - 320px)',
   },
@@ -16,33 +16,32 @@ const styles = ({
     flex: 1,
     marginLeft: 15,
   },
-});
-
+};
 
 const ChatHeader = ({
-  classes, logout, currentUser, editUserProfile, activeChat, leaveChat, deleteChat, isConnected,
+  classes,
+  logout,
+  currentUser,
+  editUserProfile,
+  activeChat,
+  leaveChat,
+  deleteChat,
+  isConnected,
 }) => (
-
-  <AppBar
-    position="absolute"
-    className={classes.appBar}
-  >
+  <AppBar position="absolute" className={classes.appBar}>
     <Toolbar>
       {activeChat ? (
         <React.Fragment>
-          <ChatAvatar colorFrom={activeChat._id}>
-            {activeChat.title}
-          </ChatAvatar>
+          <ChatAvatar colorFrom={activeChat._id}>{activeChat.title}</ChatAvatar>
           <Typography variant="title" color="inherit" noWrap className={classes.title}>
             {activeChat.title}
-            {currentUser.isChatMember
-            && (
-            <ChatMenu
-              disabled={!isConnected}
-              onLeaveChat={() => leaveChat(activeChat._id)}
-              onDeleteChat={() => deleteChat(activeChat._id)}
-              currentUser={currentUser}
-            />
+            {currentUser.isChatMember && (
+              <ChatMenu
+                disabled={!isConnected}
+                onLeaveChat={() => leaveChat(activeChat._id)}
+                onDeleteChat={() => deleteChat(activeChat._id)}
+                currentUser={currentUser}
+              />
             )}
           </Typography>
         </React.Fragment>

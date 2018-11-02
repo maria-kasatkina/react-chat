@@ -28,7 +28,6 @@ class MessageList extends React.Component {
     this.scrollDownHistory();
   }
 
-
   scrollDownHistory() {
     if (this.messagesWrapper) {
       this.messagesWrapper.scrollTop = this.messagesWrapper.scrollHeight;
@@ -46,9 +45,10 @@ class MessageList extends React.Component {
             this.messagesWrapper = wrapper;
           }}
         >
-          {messageList && messageList.map(messageItem => (
-            <MessageItem key={messageItem._id} currentUser={currentUser} {...messageItem} />
-          ))}
+          {messageList
+            && messageList.map(messageItem => (
+              <MessageItem key={messageItem._id} currentUser={currentUser} {...messageItem} />
+            ))}
         </div>
       );
     }

@@ -85,23 +85,22 @@ export function fetchChat(chatId) {
 }
 
 export function setActiveChat(chatId) {
-  return dispatch => dispatch(fetchChat(chatId))
-    .then((data) => {
-      const success = data && data.payload && data.payload.success;
-      if (!success) {
-        dispatch(redirect('chat'));
-        return dispatch({
-          type: types.UNSET_ACTIVE_CHAT,
-        });
-      }
-
-      dispatch({
-        type: types.SET_ACTIVE_CHAT,
-        payload: data.payload,
+  return dispatch => dispatch(fetchChat(chatId)).then((data) => {
+    const success = data && data.payload && data.payload.success;
+    if (!success) {
+      dispatch(redirect('chat'));
+      return dispatch({
+        type: types.UNSET_ACTIVE_CHAT,
       });
+    }
 
-      return dispatch(redirect(`chat/${data.payload.chat._id}`));
+    dispatch({
+      type: types.SET_ACTIVE_CHAT,
+      payload: data.payload,
     });
+
+    return dispatch(redirect(`chat/${data.payload.chat._id}`));
+  });
 }
 
 export function addNewChat(title) {
@@ -119,11 +118,16 @@ export function addNewChat(title) {
       type: types.ADD_NEW_CHAT_REQUEST,
     });
 
-    return callApi('/chats', token, { method: 'POST' }, {
-      data: {
-        title,
+    return callApi(
+      '/chats',
+      token,
+      { method: 'POST' },
+      {
+        data: {
+          title,
+        },
       },
-    })
+    )
       .then((json) => {
         dispatch({
           type: types.ADD_NEW_CHAT_SUCCESS,

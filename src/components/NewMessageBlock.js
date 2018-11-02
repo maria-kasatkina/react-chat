@@ -51,29 +51,27 @@ class NewMessageBlock extends React.Component {
     return (
       <div className={classes.newMessageBlock}>
         <Paper className={classes.messageWrapper}>
-          {isChatMember
-            ? (
-              <Input
-                fullWidth
-                disabled={disabled}
-                name="content"
-                value={content}
-                placeholder="Type your message..."
-                onChange={this.handleInputChange}
-                onKeyPress={this.handleSendMessage}
-              />
-            )
-            : (
-              <Button
-                fullWidth
-                color="primary"
-                variant="contained"
-                onClick={this.handleJoinChat}
-                disabled={disabled}
-              >
+          {isChatMember ? (
+            <Input
+              fullWidth
+              disabled={disabled}
+              name="content"
+              value={content}
+              placeholder="Type your message..."
+              onChange={this.handleInputChange}
+              onKeyPress={this.handleSendMessage}
+            />
+          ) : (
+            <Button
+              fullWidth
+              color="primary"
+              variant="contained"
+              onClick={this.handleJoinChat}
+              disabled={disabled}
+            >
               Join chat
-              </Button>
-            )}
+            </Button>
+          )}
         </Paper>
       </div>
     );

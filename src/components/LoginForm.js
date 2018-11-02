@@ -58,12 +58,7 @@ class LoginForm extends React.Component {
           onChange={this.handleInputChange}
           error={!password.isValid}
         />
-        <Button
-          variant="contained"
-          color="primary"
-          type="submit"
-          fullWidth
-        >
+        <Button variant="contained" color="primary" type="submit" fullWidth>
           Login
         </Button>
       </form>

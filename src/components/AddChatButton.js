@@ -26,7 +26,6 @@ const styles = theme => ({
   },
 });
 
-
 class AddChatButton extends React.Component {
   state = {
     isOpen: false,
