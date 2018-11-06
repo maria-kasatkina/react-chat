@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from '@material-ui/core/Button';
@@ -24,6 +25,22 @@ const styles = theme => ({
 });
 
 class UserMenu extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    currentUser: PropTypes.shape({
+      _id: PropTypes.string,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      username: PropTypes.string,
+      isMember: PropTypes.bool.isRequired,
+      isCreator: PropTypes.bool.isRequired,
+      isChatMember: PropTypes.bool.isRequired,
+    }).isRequired,
+    editUserProfile: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    onLogout: PropTypes.func.isRequired,
+  };
+
   state = {
     anchorEl: null,
     openModal: false,

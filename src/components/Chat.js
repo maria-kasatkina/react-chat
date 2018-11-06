@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -40,7 +41,7 @@ const Chat = ({
   <main className={classes.content}>
     {activeChat ? (
       <React.Fragment>
-        <MessageList messageList={messageList} activeChat={activeChat} currentUser={currentUser} />
+        <MessageList messageList={messageList} currentUser={currentUser} />
         <NewMessageBlock
           disabled={!isConnected}
           sendMessage={sendMessage}
@@ -52,7 +53,7 @@ const Chat = ({
     ) : (
       <div className={classes.infoBlock}>
         <Paper className={classes.paper}>
-          <Typography variant="display1" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             Start messaging…
           </Typography>
         </Paper>
@@ -60,5 +61,44 @@ const Chat = ({
     )}
   </main>
 );
+
+Chat.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  messageList: PropTypes.arrayOf(
+    PropTypes.shape({
+      chatId: PropTypes.string.isRequired,
+      content: PropTypes.string.isRequired,
+      statusMessage: PropTypes.bool,
+      sender: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        username: PropTypes.string.isRequired,
+        lastName: PropTypes.string,
+        firstName: PropTypes.string,
+      }).isRequired,
+      createdAt: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  joinChat: PropTypes.func.isRequired,
+  activeChat: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }),
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    username: PropTypes.string,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+  }).isRequired,
+  isConnected: PropTypes.bool.isRequired,
+};
+
+Chat.defaultProps = {
+  activeChat: null,
+};
 
 export default withStyles(styles)(Chat);

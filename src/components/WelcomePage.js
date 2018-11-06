@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -24,6 +25,18 @@ const styles = theme => ({
 });
 
 class WelcomePage extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    signup: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
+    isAuthenticated: PropTypes.bool.isRequired,
+    error: PropTypes.instanceOf(Error),
+  };
+
+  static defaultProps = {
+    error: null,
+  };
+
   state = {
     activeTab: 0,
   };
@@ -46,7 +59,7 @@ class WelcomePage extends React.Component {
       <React.Fragment>
         <AppBar position="absolute" className={classes.appBar}>
           <Toolbar>
-            <Typography variant="title" color="inherit" noWrap>
+            <Typography variant="h6" color="inherit" noWrap>
               Chat for a while
             </Typography>
           </Toolbar>

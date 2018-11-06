@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -33,7 +34,7 @@ const ChatHeader = ({
       {activeChat ? (
         <React.Fragment>
           <ChatAvatar colorFrom={activeChat._id}>{activeChat.title}</ChatAvatar>
-          <Typography variant="title" color="inherit" noWrap className={classes.title}>
+          <Typography variant="h6" color="inherit" noWrap className={classes.title}>
             {activeChat.title}
             {currentUser.isChatMember && (
               <ChatMenu
@@ -46,7 +47,7 @@ const ChatHeader = ({
           </Typography>
         </React.Fragment>
       ) : (
-        <Typography variant="title" color="inherit" noWrap className={classes.title}>
+        <Typography variant="h6" color="inherit" noWrap className={classes.title}>
           Chat for a while
         </Typography>
       )}
@@ -59,5 +60,32 @@ const ChatHeader = ({
     </Toolbar>
   </AppBar>
 );
+
+ChatHeader.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  logout: PropTypes.func.isRequired,
+  editUserProfile: PropTypes.func.isRequired,
+  leaveChat: PropTypes.func.isRequired,
+  deleteChat: PropTypes.func.isRequired,
+  isConnected: PropTypes.bool.isRequired,
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    username: PropTypes.string,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+  }).isRequired,
+  activeChat: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+  }),
+};
+
+ChatHeader.defaultProps = {
+  activeChat: null,
+};
 
 export default withStyles(styles)(ChatHeader);

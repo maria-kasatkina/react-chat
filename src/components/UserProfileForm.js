@@ -1,16 +1,30 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 class UserProfileForm extends React.Component {
-  /* eslint-disable react/destructuring-assignment */
-  state = {
-    username: this.props.currentUser.username,
-    firstName: this.props.currentUser.firstName,
-    lastName: this.props.currentUser.lastName,
+  static propTypes = {
+    currentUser: PropTypes.shape({
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      username: PropTypes.string,
+    }).isRequired,
+    onSubmit: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
   };
-  /* eslint-enable react/destructuring-assignment */
+
+  constructor(...args) {
+    super(...args);
+
+    const { currentUser } = this.props;
+    this.state = {
+      username: currentUser.username,
+      firstName: currentUser.firstName,
+      lastName: currentUser.lastName,
+    };
+  }
 
   handleInputChange = (event) => {
     event.persist();
@@ -32,7 +46,7 @@ class UserProfileForm extends React.Component {
     const { username, firstName, lastName } = this.state;
     return (
       <form onSubmit={this.handleSubmit}>
-        <Typography component="h3" variant="title" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Edit profile
         </Typography>
         <TextField

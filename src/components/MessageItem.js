@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import classNames from 'classnames';
 import Typography from '@material-ui/core/Typography';
@@ -68,6 +69,32 @@ const MessageItem = ({
       {isMyMessage && userAvatar}
     </div>
   );
+};
+
+MessageItem.propTypes = {
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
+  content: PropTypes.string.isRequired,
+  sender: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    username: PropTypes.string.isRequired,
+    lastName: PropTypes.string,
+    firstName: PropTypes.string,
+  }).isRequired,
+  createdAt: PropTypes.string.isRequired,
+  statusMessage: PropTypes.bool,
+  currentUser: PropTypes.shape({
+    _id: PropTypes.string.isRequired,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
+    username: PropTypes.string,
+    isMember: PropTypes.bool.isRequired,
+    isCreator: PropTypes.bool.isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+  }).isRequired,
+};
+
+MessageItem.defaultProps = {
+  statusMessage: false,
 };
 
 export default withStyles(styles)(MessageItem);

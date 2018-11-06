@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Input from '@material-ui/core/Input';
@@ -18,6 +19,14 @@ const styles = () => ({
 });
 
 class NewMessageBlock extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    isChatMember: PropTypes.bool.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    onJoinButtonClick: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+  };
+
   state = {
     content: '',
   };

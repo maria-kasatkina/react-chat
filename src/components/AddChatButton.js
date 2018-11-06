@@ -1,34 +1,41 @@
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import Modal from '@material-ui/core/Modal';
-import Paper from '@material-ui/core/Paper';
-import AddChatForm from './AddChatForm';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import Button from "@material-ui/core/Button";
+import AddIcon from "@material-ui/icons/Add";
+import Modal from "@material-ui/core/Modal";
+import Paper from "@material-ui/core/Paper";
+import AddChatForm from "./AddChatForm";
 
 const styles = theme => ({
   addChatButton: {
-    position: 'absolute',
-    right: '30px',
-    bottom: '60px',
+    position: "absolute",
+    right: "30px",
+    bottom: "60px"
   },
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    padding: theme.spacing.unit * 4
   },
   modal: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center"
+  }
 });
 
 class AddChatButton extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    addNewChat: PropTypes.func.isRequired,
+    disabled: PropTypes.bool.isRequired
+  };
+
   state = {
-    isOpen: false,
+    isOpen: false
   };
 
   toggleModal = () => {

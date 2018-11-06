@@ -1,5 +1,6 @@
 /* eslint no-underscore-dangle: 0 */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
 import Typography from '@material-ui/core/Typography';
 import MessageItem from './MessageItem';
@@ -20,6 +21,33 @@ const styles = () => ({
 });
 
 class MessageList extends React.Component {
+  static propTypes = {
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
+    messageList: PropTypes.arrayOf(
+      PropTypes.shape({
+        chatId: PropTypes.string.isRequired,
+        content: PropTypes.string.isRequired,
+        statusMessage: PropTypes.bool,
+        sender: PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          username: PropTypes.string.isRequired,
+          lastName: PropTypes.string,
+          firstName: PropTypes.string,
+        }).isRequired,
+        createdAt: PropTypes.string.isRequired,
+      }),
+    ).isRequired,
+    currentUser: PropTypes.shape({
+      _id: PropTypes.string,
+      firstName: PropTypes.string,
+      lastName: PropTypes.string,
+      username: PropTypes.string,
+      isMember: PropTypes.bool.isRequired,
+      isCreator: PropTypes.bool.isRequired,
+      isChatMember: PropTypes.bool.isRequired,
+    }).isRequired,
+  };
+
   componentDidMount() {
     this.scrollDownHistory();
   }
@@ -55,7 +83,7 @@ class MessageList extends React.Component {
 
     return (
       <div className={classes.noMessageWrapper}>
-        <Typography variant="display1" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           There is no message yet
         </Typography>
       </div>

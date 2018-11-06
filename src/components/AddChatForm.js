@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 class AddChatForm extends React.Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    toggleModal: PropTypes.func.isRequired,
+  };
+
   state = {
     title: {
       value: '',
@@ -45,7 +51,7 @@ class AddChatForm extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <Typography component="h3" variant="title" gutterBottom>
+        <Typography component="h3" variant="h6" gutterBottom>
           Create new chat
         </Typography>
         <TextField
